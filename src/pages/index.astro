@@ -53,30 +53,12 @@ const featured = directories.slice(0, 6);
       <div class="mx-auto max-w-5xl">
         <h2 class="text-2xl font-bold text-slate-900 mb-6">All Categories</h2>
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <div class="bg-white border border-slate-200 rounded-lg p-4">
-            <h3 class="font-semibold text-slate-800">AI Copywriting</h3>
-            <a href="/best/ai-copywriting-tools/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
-          </div>
-          <div class="bg-white border border-slate-200 rounded-lg p-4">
-            <h3 class="font-semibold text-slate-800">Email Marketing</h3>
-            <a href="/best/email-marketing-tools/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
-          </div>
-          <div class="bg-white border border-slate-200 rounded-lg p-4">
-            <h3 class="font-semibold text-slate-800">Landing Page Builders</h3>
-            <a href="/best/landing-page-builders/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
-          </div>
-          <div class="bg-white border border-slate-200 rounded-lg p-4">
-            <h3 class="font-semibold text-slate-800">A/B Testing</h3>
-            <a href="/best/ab-testing-tools/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
-          </div>
-          <div class="bg-white border border-slate-200 rounded-lg p-4">
-            <h3 class="font-semibold text-slate-800">Funnel Builders</h3>
-            <a href="/best/funnel-builder-tools/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
-          </div>
-          <div class="bg-white border border-slate-200 rounded-lg p-4">
-            <h3 class="font-semibold text-slate-800">SEO Tools</h3>
-            <a href="/best/ai-seo-tools/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
-          </div>
+          {directories.map((entry) => (
+            <div class="bg-white border border-slate-200 rounded-lg p-4">
+              <h3 class="font-semibold text-slate-800">{entry.data.category || entry.data.title}</h3>
+              <a href={`/best/${entry.id}/`} class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
+            </div>
+          ))}
         </div>
       </div>
     </section>
