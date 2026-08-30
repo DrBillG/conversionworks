@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://conversionworks.site/sitemap-index.xml
+Sitemap: https://conversionworks.site/sitemap.xml
