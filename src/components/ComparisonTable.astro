@@ -1,0 +1,41 @@
+---
+interface ToolRow {
+  name: string;
+  bestFor: string;
+  freeTier: string;
+  startingPrice: string;
+  keyFeature: string;
+  url?: string;
+}
+interface Props {
+  tools: ToolRow[];
+}
+const { tools } = Astro.props;
+---
+
+<div class="table-wrap">
+  <table class="w-full text-sm border-collapse">
+    <thead>
+      <tr class="bg-slate-100">
+        <th class="text-left px-4 py-3 font-semibold text-slate-700 border-b-2 border-slate-200">Tool</th>
+        <th class="text-left px-4 py-3 font-semibold text-slate-700 border-b-2 border-slate-200">Best For</th>
+        <th class="text-left px-4 py-3 font-semibold text-slate-700 border-b-2 border-slate-200">Free Tier</th>
+        <th class="text-left px-4 py-3 font-semibold text-slate-700 border-b-2 border-slate-200">Starting Price</th>
+        <th class="text-left px-4 py-3 font-semibold text-slate-700 border-b-2 border-slate-200">Key Feature</th>
+      </tr>
+    </thead>
+    <tbody>
+      {tools.map((tool, i) => (
+        <tr class={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+          <td class="px-4 py-3 border-b border-slate-100 font-medium text-slate-800">
+            {tool.url ? <a href={tool.url} class="text-blue-600 hover:underline">{tool.name}</a> : tool.name}
+          </td>
+          <td class="px-4 py-3 border-b border-slate-100 text-slate-600">{tool.bestFor}</td>
+          <td class="px-4 py-3 border-b border-slate-100 text-slate-600">{tool.freeTier}</td>
+          <td class="px-4 py-3 border-b border-slate-100 text-slate-600">{tool.startingPrice}</td>
+          <td class="px-4 py-3 border-b border-slate-100 text-slate-600">{tool.keyFeature}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

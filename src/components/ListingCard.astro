@@ -1,0 +1,61 @@
+---
+interface Tool {
+  name: string;
+  rank: number;
+  description: string;
+  pricing?: string;
+  pros?: string[];
+  cons?: string[];
+  url?: string;
+}
+interface Props {
+  tool: Tool;
+}
+const { tool } = Astro.props;
+---
+
+<div class="bg-white border border-slate-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+  <div class="flex items-start gap-4 mb-4">
+    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-bold flex items-center justify-center">{tool.rank}</span>
+    <h3 class="text-xl font-bold text-slate-900 flex-1">{tool.name}</h3>
+  </div>
+  <p class="text-slate-600 mb-4">{tool.description}</p>
+  {tool.pricing && (
+    <div class="bg-slate-50 rounded p-3 mb-4 text-sm text-slate-700">
+      <strong class="text-slate-800">Pricing:</strong> {tool.pricing}
+    </div>
+  )}
+  <div class="grid gap-4 sm:grid-cols-2">
+    {tool.pros && tool.pros.length > 0 && (
+      <div>
+        <h4 class="text-sm font-semibold text-green-700 mb-2">Pros</h4>
+        <ul class="space-y-1">
+          {tool.pros.map((pro) => (
+            <li class="text-sm text-slate-600 flex items-start gap-2">
+              <span class="text-green-600 mt-0.5">&#10003;</span>
+              <span>{pro}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+    {tool.cons && tool.cons.length > 0 && (
+      <div>
+        <h4 class="text-sm font-semibold text-red-700 mb-2">Cons</h4>
+        <ul class="space-y-1">
+          {tool.cons.map((con) => (
+            <li class="text-sm text-slate-600 flex items-start gap-2">
+              <span class="text-red-500 mt-0.5">&#10007;</span>
+              <span>{con}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+  {tool.url && (
+    <a href={tool.url} rel="noopener nofollow" target="_blank" class="mt-4 inline-block px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 transition-colors">
+      Visit {tool.name}
+    </a>
+  )}
+</div>

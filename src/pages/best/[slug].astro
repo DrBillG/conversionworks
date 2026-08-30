@@ -1,0 +1,43 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import DirectoryLayout from '../../layouts/DirectoryLayout.astro';
+import { render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const directories = await getCollection('directories');
+  return directories.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+type Props = { entry: CollectionEntry<'directories'> };
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Best', url: '/best/' },
+  { name: entry.data.title, url: `/best/${entry.id}/` },
+];
+
+const relatedPages = [
+  { title: 'Best AI SEO Tools', url: '/best/ai-seo-tools/', description: 'Tools for keyword research, content optimization, and SERP tracking' },
+  { title: 'Best Email Marketing Tools', url: '/best/email-marketing-tools/', description: 'Platforms for newsletters, automation, and drip campaigns' },
+  { title: 'Best Landing Page Builders', url: '/best/landing-page-builders/', description: 'Drag-and-drop builders for high-converting pages' },
+  { title: 'Best A/B Testing Tools', url: '/best/ab-testing-tools/', description: 'Split testing platforms to validate your copy experiments' },
+  { title: 'Best Funnel Builder Tools', url: '/best/funnel-builder-tools/', description: 'All-in-one platforms for sales funnels and marketing automation' },
+];
+---
+
+<DirectoryLayout
+  title={`${entry.data.title} | conversionworks.site`}
+  description={entry.data.description}
+  breadcrumbs={breadcrumbs}
+  relatedPages={relatedPages}
+>
+  <article class="prose max-w-none">
+    <Content />
+  </article>
+</DirectoryLayout>

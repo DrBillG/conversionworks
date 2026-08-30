@@ -1,0 +1,47 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import RelatedPages from '../components/RelatedPages.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  breadcrumbs: { name: string; url: string }[];
+  relatedPages?: { title: string; url: string; description?: string }[];
+}
+
+const { title, description, breadcrumbs, relatedPages = [] } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="conversionworks.site" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body class="min-h-screen bg-white text-slate-900 antialiased">
+    <Header />
+    <Breadcrumbs items={breadcrumbs} />
+    <main class="mx-auto max-w-5xl px-4 py-8">
+      <slot />
+      {relatedPages.length > 0 && <RelatedPages pages={relatedPages} />}
+    </main>
+    <Footer />
+  </body>
+</html>

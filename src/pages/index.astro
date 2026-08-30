@@ -1,0 +1,86 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import '../styles/global.css';
+
+const directories = await getCollection('directories');
+const featured = directories.slice(0, 6);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>conversionworks.site — Best Marketing &amp; Conversion Optimization Tools</title>
+    <meta name="description" content="Find the best marketing and conversion optimization tools. Compare pricing, features, and pros/cons for AI copywriting, email marketing, A/B testing, and more." />
+    <meta property="og:title" content="conversionworks.site — Best Marketing &amp; Conversion Optimization Tools" />
+    <meta property="og:description" content="Find the best marketing and conversion optimization tools. Compare pricing, features, and pros/cons for AI copywriting, email marketing, A/B testing, and more." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.site} />
+  </head>
+  <body class="min-h-screen bg-white text-slate-900 antialiased">
+    <Header />
+
+    <section class="bg-gradient-to-b from-blue-50 to-white border-b border-slate-200">
+      <div class="mx-auto max-w-5xl px-4 py-16 text-center">
+        <h1 class="text-4xl font-extrabold text-slate-900 sm:text-5xl">
+          Find the best tools for your stack
+        </h1>
+        <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+          Directory of the best marketing and conversion optimization tools. Compare pricing, features, and pros/cons — updated for 2026.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-5xl px-4 py-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">Featured Directories</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {featured.map((entry) => (
+          <a href={`/best/${entry.id}/`} class="block bg-white border border-slate-200 rounded-lg p-6 hover:border-blue-300 hover:shadow-md transition-all">
+            <h3 class="text-lg font-bold text-blue-600 hover:underline">{entry.data.title}</h3>
+            <p class="mt-2 text-sm text-slate-600 line-clamp-3">{entry.data.description}</p>
+            <span class="mt-3 inline-block text-sm font-medium text-blue-600">View directory &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-5xl px-4 py-12 bg-slate-50">
+      <div class="mx-auto max-w-5xl">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">All Categories</h2>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bg-white border border-slate-200 rounded-lg p-4">
+            <h3 class="font-semibold text-slate-800">AI Copywriting</h3>
+            <a href="/best/ai-copywriting-tools/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-lg p-4">
+            <h3 class="font-semibold text-slate-800">Email Marketing</h3>
+            <a href="/best/email-marketing-tools/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-lg p-4">
+            <h3 class="font-semibold text-slate-800">Landing Page Builders</h3>
+            <a href="/best/landing-page-builders/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-lg p-4">
+            <h3 class="font-semibold text-slate-800">A/B Testing</h3>
+            <a href="/best/ab-testing-tools/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-lg p-4">
+            <h3 class="font-semibold text-slate-800">Funnel Builders</h3>
+            <a href="/best/funnel-builder-tools/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-lg p-4">
+            <h3 class="font-semibold text-slate-800">SEO Tools</h3>
+            <a href="/best/ai-seo-tools/" class="text-sm text-blue-600 hover:underline">View tools &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </body>
+</html>
