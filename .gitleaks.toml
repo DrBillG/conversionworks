@@ -1,0 +1,31 @@
+title = "security-baseline"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Allow placeholders, examples, locks and build output"
+paths = [
+  '''(^|/)node_modules/''',
+  '''(^|/)\.git/''',
+  '''(^|/)dist/''',
+  '''(^|/)build/''',
+  '''(^|/)\.next/''',
+  '''(^|/)\.astro/''',
+  '''(^|/)coverage/''',
+  '''(^|/)\.env\.example$''',
+  '''(^|/)\.env\.sample$''',
+  '''(^|/)\.env\.template$''',
+  '''(^|/)package-lock\.json$''',
+  '''(^|/)bun\.lockb$''',
+  '''(^|/)yarn\.lock$''',
+  '''(^|/)pnpm-lock\.yaml$''',
+]
+regexes = [
+  '''(?i)your[-_ ]?(api|key|token)''',
+  '''(?i)placeholder''',
+  '''(?i)change[-_ ]?me''',
+  '''(?i)xxx+''',
+  '''\$\{[A-Za-z_]+\}''',
+  '''<[A-Za-z_]+>''',
+]
