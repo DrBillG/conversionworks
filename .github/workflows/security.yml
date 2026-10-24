@@ -7,10 +7,11 @@ on:
     branches: [main, master]
   schedule:
     - cron: "0 6 * * 1"
+  workflow_dispatch:
 
 permissions:
   contents: read
-  security-events: write
+  pull-requests: read
 
 jobs:
   secret-scan:
@@ -42,10 +43,12 @@ jobs:
   npm-audit:
     name: npm audit
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('package-lock.json', 'package.json') != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
+        if: ${{ hashFiles('package.json') != '' }}
         with:
           node-version: 22
-      - run: npm audit --audit-level=high || true
+      - name: npm audit (high and above)
+        if: ${{ hashFiles('package-lock.json') != '' }}
+        run: npm audit --audit-level=high || true
