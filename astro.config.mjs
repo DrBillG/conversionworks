@@ -9,6 +9,7 @@ export default defineConfig({
   integrations: [sitemap({ customPages: [
     'https://conversionworks.site/content-machine/',
     'https://conversionworks.site/marketing-campaign/',
+    'https://conversionworks.site/brag/',
   ] })],
   vite: {
     plugins: [tailwindcss()],
